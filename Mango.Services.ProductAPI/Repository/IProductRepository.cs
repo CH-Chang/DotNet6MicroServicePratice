@@ -19,7 +19,7 @@ namespace Mango.Services.ProductAPI.Repository
         /// </summary>
         /// <param name="productId">商品ID</param>
         /// <returns>指定ID的商品</returns>
-        public Task<ProductDto> GetProductById(int productId);
+        public Task<ProductDto?> GetProductById(int productId);
 
         /// <summary>
         /// 新增或更新商品
