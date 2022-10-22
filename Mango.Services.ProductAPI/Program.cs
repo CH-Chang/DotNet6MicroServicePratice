@@ -1,4 +1,5 @@
 #pragma warning disable SA1200 // Using directives should be placed correctly
+
 using Mango.Services.ProductAPI.DbContexts;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
-
 
 #pragma warning restore SA1200 // Using directives should be placed correctly

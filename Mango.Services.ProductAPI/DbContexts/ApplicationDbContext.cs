@@ -1,5 +1,6 @@
 ﻿namespace Mango.Services.ProductAPI.DbContexts
 {
+    using Mango.Services.ProductAPI.Models;
     using Microsoft.EntityFrameworkCore;
 
     /// <summary>
@@ -15,5 +16,10 @@
             : base(options)
         {
         }
+
+        /// <summary>
+        /// 商品表
+        /// </summary>
+        public DbSet<Product> Products { get; set; }
     }
 }

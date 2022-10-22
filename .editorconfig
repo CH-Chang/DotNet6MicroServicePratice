@@ -9,11 +9,13 @@ insert_final_newline = true
 [*.cs]
 indent_size = 4
 dotnet_sort_system_directives_first = true
-
-[*.{cs,vb}]
+# 關閉屬性總結固定格式
+dotnet_diagnostic.SA1623.severity = none
 # 關閉總結需要以句點結尾
 dotnet_diagnostic.SA1629.severity = none
 # 關閉檔案需加上版權標頭
 dotnet_diagnostic.SA1633.severity = none
 # 關閉建構子總結固定格式
 dotnet_diagnostic.SA1642.severity = none
+# 關閉必須宣告可為空值
+dotnet_diagnostic.CS8618.severity = none
