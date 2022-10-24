@@ -19,3 +19,7 @@ dotnet_diagnostic.SA1633.severity = none
 dotnet_diagnostic.SA1642.severity = none
 # 關閉必須宣告可為空值
 dotnet_diagnostic.CS8618.severity = none
+
+[**/Migrations/*.cs]
+dotnet_analyzer_diagnostic.severity = none
+dotnet_diagnostic.severity = none
