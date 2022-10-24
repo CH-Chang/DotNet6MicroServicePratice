@@ -1,0 +1,23 @@
+name: Web
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      working-directory: Mango.Web
+      run: dotnet restore
+    - name: Build
+      working-directory: Mango.Web
+      run: dotnet build  --no-restore
