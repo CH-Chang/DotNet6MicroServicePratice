@@ -19,4 +19,5 @@ jobs:
       working-directory: Mango.Services.ProductAPI
       run: dotnet restore
     - name: Build
-      run: dotnet build
+      working-directory: Mango.Services.ProductAPI
+      run: dotnet build --no-restore
