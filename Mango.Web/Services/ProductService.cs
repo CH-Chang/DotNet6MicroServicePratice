@@ -9,8 +9,6 @@ namespace Mango.Web.Services
     /// </summary>
     public class ProductService : BaseService, IProductService
     {
-        private readonly IHttpClientFactory httpClientFactory;
-
         /// <summary>
         /// 建構子
         /// </summary>
@@ -18,7 +16,6 @@ namespace Mango.Web.Services
         public ProductService(IHttpClientFactory httpClientFactory)
             : base(httpClientFactory)
         {
-            this.httpClientFactory = httpClientFactory;
         }
 
         /// <inheritdoc />

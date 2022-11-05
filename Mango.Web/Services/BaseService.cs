@@ -3,6 +3,7 @@ namespace Mango.Web.Services
     using System;
     using System.Text;
     using System.Text.Json;
+    using System.Text.Json.Serialization;
     using Mango.Web.Models;
     using Mango.Web.Services.IServices;
     using static Mango.Web.SD;
@@ -12,30 +13,34 @@ namespace Mango.Web.Services
     /// </summary>
     public class BaseService : IBaseService
     {
+        private readonly IHttpClientFactory httpClientFactory;
+
+        private readonly JsonSerializerOptions jsonOptions;
+
         /// <summary>
         /// 建構子
         /// </summary>
         /// <param name="httpClientFactory">HTTP實例工廠</param>
         public BaseService(IHttpClientFactory httpClientFactory)
         {
-            this.HttpClientFactory = httpClientFactory;
+            this.httpClientFactory = httpClientFactory;
             this.ResponseModel = new ResponseDto();
+            this.jsonOptions = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+            this.jsonOptions.Converters.Add(new JsonStringEnumConverter());
         }
 
         /// <inheritdoc />
         public ResponseDto ResponseModel { get; set; }
-
-        /// <summary>
-        /// HTTP實例工廠
-        /// </summary>
-        public IHttpClientFactory HttpClientFactory { get; set; }
 
         /// <inheritdoc />
         public async Task<T> SendAsync<T>(ApiRequest apiRequest)
         {
             try
             {
-                HttpClient httpClient = this.HttpClientFactory.CreateClient("ManogoAPI");
+                HttpClient httpClient = this.httpClientFactory.CreateClient("ManogoAPI");
                 httpClient.DefaultRequestHeaders.Clear();
 
                 HttpRequestMessage message = new HttpRequestMessage();
@@ -61,7 +66,7 @@ namespace Mango.Web.Services
                 HttpResponseMessage apiResponse = await httpClient.SendAsync(message);
 
                 string apiContent = await apiResponse.Content.ReadAsStringAsync();
-                T apiResponseDto = JsonSerializer.Deserialize<T>(apiContent) ?? throw new ArgumentException("Json string should not be \"null\"");
+                T apiResponseDto = JsonSerializer.Deserialize<T>(apiContent, this.jsonOptions) ?? throw new ArgumentException("Json string should not be \"null\"");
 
                 return apiResponseDto;
             }
@@ -76,7 +81,7 @@ namespace Mango.Web.Services
 
                 var resBytes = JsonSerializer.SerializeToUtf8Bytes(dto);
                 var resString = Encoding.UTF8.GetString(resBytes);
-                var resDto = JsonSerializer.Deserialize<T>(resString) ?? throw new ArgumentException("Json string should not be \"null\"");
+                var resDto = JsonSerializer.Deserialize<T>(resString, this.jsonOptions) ?? throw new ArgumentException("Json string should not be \"null\"");
 
                 return resDto;
             }
