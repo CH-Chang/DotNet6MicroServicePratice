@@ -32,9 +32,26 @@ namespace Mango.Services.ProductAPI.Repository
         }
 
         /// <inheritdoc/>
-        public Task<bool> DeleteProduct(int productId)
+        public async Task<bool> DeleteProduct(int productId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Product? product = await this.dbContext.Products.FirstOrDefaultAsync(p => p.ProductId == productId);
+
+                if (product == null)
+                {
+                    return false;
+                }
+
+                this.dbContext.Remove(product);
+                await this.dbContext.SaveChangesAsync();
+
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
         }
 
         /// <inheritdoc/>
