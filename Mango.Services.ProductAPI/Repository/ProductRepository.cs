@@ -26,9 +26,21 @@ namespace Mango.Services.ProductAPI.Repository
         }
 
         /// <inheritdoc/>
-        public Task<ProductDto> CreateOrUpdateProduct(ProductDto productDto)
+        public async Task<ProductDto> CreateOrUpdateProduct(ProductDto productDto)
         {
-            throw new NotImplementedException();
+            Product product = this.mapper.Map<ProductDto, Product>(productDto);
+            if (product.ProductId > 0)
+            {
+                this.dbContext.Update(product);
+            }
+            else
+            {
+                this.dbContext.Add(product);
+            }
+
+            await this.dbContext.SaveChangesAsync();
+
+            return this.mapper.Map<Product, ProductDto>(product);
         }
 
         /// <inheritdoc/>
