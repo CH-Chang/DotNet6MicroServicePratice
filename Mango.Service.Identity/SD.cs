@@ -15,7 +15,7 @@ namespace Mango.Service.Identity
             new IdentityResources.Profile(),
         };
 
-        public static IEnumerable<ApiScope> apiScopes => new List<ApiScope>
+        public static IEnumerable<ApiScope> ApiScopes => new List<ApiScope>
         {
             new ApiScope("mango", "Mango Server"),
             new ApiScope("read", "Read your data."),
