@@ -1,5 +1,6 @@
 namespace Mango.Web.Controllers
 {
+    using System.Collections.Generic;
     using Mango.Web.Models;
     using Mango.Web.Services.IServices;
     using Microsoft.AspNetCore.Mvc;
@@ -37,6 +38,36 @@ namespace Mango.Web.Controllers
             }
 
             return this.View(list);
+        }
+
+        /// <summary>
+        /// 創建商品
+        /// </summary>
+        /// <returns>商品創建成功</returns>
+        public IActionResult ProductCreate()
+        {
+            return this.View();
+        }
+
+        /// <summary>
+        /// 創建商品API
+        /// </summary>
+        /// <param name="model">商品</param>
+        /// <returns>商品創建成功</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ProductCreate(ProductDto model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var response = await this.productService.CreateProductAsync<ResponseDto>(model);
+                if (response != null && response.IsSuccess)
+                {
+                    return this.RedirectToAction(nameof(this.ProductIndex));
+                }
+            }
+
+            return this.View(model);
         }
     }
 }
