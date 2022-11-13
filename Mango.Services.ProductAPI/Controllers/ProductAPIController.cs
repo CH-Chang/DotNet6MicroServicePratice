@@ -2,6 +2,7 @@ namespace Mango.Services.ProductAPI.Controllers
 {
     using Mango.Services.ProductAPI.Models.Dto;
     using Mango.Services.ProductAPI.Repository;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     /// <summary>
@@ -31,6 +32,7 @@ namespace Mango.Services.ProductAPI.Controllers
         /// 取得所有商品
         /// </summary>
         /// <returns>所有商品</returns>
+        [Authorize]
         [HttpGet]
         public async Task<object> Get()
         {
@@ -55,6 +57,7 @@ namespace Mango.Services.ProductAPI.Controllers
         /// <param name="id">商品代號</param>
         /// <returns>特定商品</returns>
         [HttpGet]
+        [Authorize]
         [Route("{id}")]
         public async Task<object> Get(int id)
         {
@@ -88,6 +91,7 @@ namespace Mango.Services.ProductAPI.Controllers
         /// <param name="productDto">商品</param>
         /// <returns>新增成功商品</returns>
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<object> Post([FromBody] ProductDto productDto)
         {
             try
@@ -112,6 +116,7 @@ namespace Mango.Services.ProductAPI.Controllers
         /// <param name="productDto">商品</param>
         /// <returns>編輯成功商品</returns>
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<object> Put([FromBody] ProductDto productDto)
         {
             try
@@ -136,6 +141,7 @@ namespace Mango.Services.ProductAPI.Controllers
         /// <param name="id">商品代號</param>
         /// <returns>刪除成功與否</returns>
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         [Route("{id}")]
         public async Task<object> Delete(int id)
         {
