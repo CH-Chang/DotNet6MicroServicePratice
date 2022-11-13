@@ -1,9 +1,9 @@
 namespace Mango.Web.Controllers
 {
-    using System.Text.Json;
     using Mango.Web.Models;
     using Mango.Web.Services.IServices;
     using Microsoft.AspNetCore.Mvc;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// 商品控制器
@@ -32,7 +32,8 @@ namespace Mango.Web.Controllers
             var response = await this.productService.GetAllProductsAsync<ResponseDto>();
             if (response != null && response.IsSuccess)
             {
-                list = JsonSerializer.Deserialize<List<ProductDto>>(Convert.ToString(response.Result)) ?? throw new ArgumentException("Json string should not be \"null\"");
+                string result = Convert.ToString(response.Result) ?? throw new ArgumentException("Result should not be null");
+                list = JsonConvert.DeserializeObject<List<ProductDto>>(result) ?? throw new ArgumentException("Json string should not be \"null\"");
             }
 
             return this.View(list);
