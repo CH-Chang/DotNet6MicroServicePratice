@@ -12,7 +12,7 @@ namespace Mango.Web.Services.IServices
         /// </summary>
         /// <typeparam name="T">商品物件</typeparam>
         /// <returns>所有商品</returns>
-        public Task<T> GetAllProductsAsync<T>();
+        public Task<T> GetAllProductsAsync<T>(string token);
 
         /// <summary>
         /// 取得特定商品
@@ -20,7 +20,7 @@ namespace Mango.Web.Services.IServices
         /// <typeparam name="T">商品物件</typeparam>
         /// <param name="id">商品編號</param>
         /// <returns>特定商品</returns>
-        public Task<T> GetProductByIdAsync<T>(int id);
+        public Task<T> GetProductByIdAsync<T>(int id, string token);
 
         /// <summary>
         /// 創建商品
@@ -28,7 +28,7 @@ namespace Mango.Web.Services.IServices
         /// <typeparam name="T">商品物件</typeparam>
         /// <param name="productDto">商品</param>
         /// <returns>成功創建商品</returns>
-        public Task<T> CreateProductAsync<T>(ProductDto productDto);
+        public Task<T> CreateProductAsync<T>(ProductDto productDto, string token);
 
         /// <summary>
         /// 更新商品
@@ -36,7 +36,7 @@ namespace Mango.Web.Services.IServices
         /// <typeparam name="T">商品物件</typeparam>
         /// <param name="productDto">商品</param>
         /// <returns>成功更新商品</returns>
-        public Task<T> UpdateProductAsync<T>(ProductDto productDto);
+        public Task<T> UpdateProductAsync<T>(ProductDto productDto, string token);
 
         /// <summary>
         /// 刪除商品
@@ -44,6 +44,6 @@ namespace Mango.Web.Services.IServices
         /// <typeparam name="T">商品物件</typeparam>
         /// <param name="id">商品編號</param>
         /// <returns>成功刪除商品</returns>
-        public Task<T> DeleteProductAsync<T>(int id);
+        public Task<T> DeleteProductAsync<T>(int id, string token);
     }
 }

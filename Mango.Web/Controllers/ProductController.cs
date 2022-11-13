@@ -1,8 +1,11 @@
 namespace Mango.Web.Controllers
 {
     using System.Collections.Generic;
+    using System.Data;
     using Mango.Web.Models;
     using Mango.Web.Services.IServices;
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
 
@@ -29,8 +32,8 @@ namespace Mango.Web.Controllers
         public async Task<IActionResult> ProductIndex()
         {
             List<ProductDto> list = new ();
-
-            var response = await this.productService.GetAllProductsAsync<ResponseDto>();
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await this.productService.GetAllProductsAsync<ResponseDto>(accessToken);
             if (response != null && response.IsSuccess)
             {
                 string result = Convert.ToString(response.Result) ?? throw new ArgumentException("Result should not be null");
@@ -60,7 +63,8 @@ namespace Mango.Web.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                var response = await this.productService.CreateProductAsync<ResponseDto>(model);
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await this.productService.CreateProductAsync<ResponseDto>(model, accessToken);
                 if (response != null && response.IsSuccess)
                 {
                     return this.RedirectToAction(nameof(this.ProductIndex));
@@ -77,7 +81,8 @@ namespace Mango.Web.Controllers
         /// <returns>商品編輯成功</returns>
         public async Task<IActionResult> ProductEdit(int productId)
         {
-            var response = await this.productService.GetProductByIdAsync<ResponseDto>(productId);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await this.productService.GetProductByIdAsync<ResponseDto>(productId, accessToken);
             if (response != null && response.IsSuccess)
             {
                 string result = Convert.ToString(response.Result) ?? throw new ArgumentException("Result should not be null");
@@ -99,7 +104,8 @@ namespace Mango.Web.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                var response = await this.productService.UpdateProductAsync<ResponseDto>(model);
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await this.productService.UpdateProductAsync<ResponseDto>(model, accessToken);
                 if (response != null && response.IsSuccess)
                 {
                     return this.RedirectToAction(nameof(this.ProductIndex));
@@ -114,9 +120,11 @@ namespace Mango.Web.Controllers
         /// </summary>
         /// <param name="productId">商品編號</param>
         /// <returns>商品編輯成功</returns>
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ProductDelete(int productId)
         {
-            var response = await this.productService.GetProductByIdAsync<ResponseDto>(productId);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await this.productService.GetProductByIdAsync<ResponseDto>(productId, accessToken);
             if (response != null && response.IsSuccess)
             {
                 string result = Convert.ToString(response.Result) ?? throw new ArgumentException("Result should not be null");
@@ -136,7 +144,8 @@ namespace Mango.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ProductDelete(ProductDto model)
         {
-            var response = await this.productService.DeleteProductAsync<ResponseDto>(model.ProductId);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await this.productService.DeleteProductAsync<ResponseDto>(model.ProductId, accessToken);
             if (response.IsSuccess)
             {
                 return this.RedirectToAction(nameof(this.ProductIndex));
