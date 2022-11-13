@@ -69,5 +69,80 @@ namespace Mango.Web.Controllers
 
             return this.View(model);
         }
+
+        /// <summary>
+        /// 編輯商品
+        /// </summary>
+        /// <param name="productId">商品編號</param>
+        /// <returns>商品編輯成功</returns>
+        public async Task<IActionResult> ProductEdit(int productId)
+        {
+            var response = await this.productService.GetProductByIdAsync<ResponseDto>(productId);
+            if (response != null && response.IsSuccess)
+            {
+                string result = Convert.ToString(response.Result) ?? throw new ArgumentException("Result should not be null");
+                ProductDto model = JsonConvert.DeserializeObject<ProductDto>(result) ?? throw new ArgumentException("Json string should not be \"null\"");
+                return this.View(model);
+            }
+
+            return this.NotFound();
+        }
+
+        /// <summary>
+        /// 編輯商品API
+        /// </summary>
+        /// <param name="model">商品</param>
+        /// <returns>商品編輯成功</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ProductEdit(ProductDto model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var response = await this.productService.UpdateProductAsync<ResponseDto>(model);
+                if (response != null && response.IsSuccess)
+                {
+                    return this.RedirectToAction(nameof(this.ProductIndex));
+                }
+            }
+
+            return this.View(model);
+        }
+
+        /// <summary>
+        /// 編輯商品
+        /// </summary>
+        /// <param name="productId">商品編號</param>
+        /// <returns>商品編輯成功</returns>
+        public async Task<IActionResult> ProductDelete(int productId)
+        {
+            var response = await this.productService.GetProductByIdAsync<ResponseDto>(productId);
+            if (response != null && response.IsSuccess)
+            {
+                string result = Convert.ToString(response.Result) ?? throw new ArgumentException("Result should not be null");
+                ProductDto model = JsonConvert.DeserializeObject<ProductDto>(result) ?? throw new ArgumentException("Json string should not be \"null\"");
+                return this.View(model);
+            }
+
+            return this.NotFound();
+        }
+
+        /// <summary>
+        /// 編輯商品API
+        /// </summary>
+        /// <param name="model">商品</param>
+        /// <returns>商品編輯成功</returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ProductDelete(ProductDto model)
+        {
+            var response = await this.productService.DeleteProductAsync<ResponseDto>(model.ProductId);
+            if (response.IsSuccess)
+            {
+                return this.RedirectToAction(nameof(this.ProductIndex));
+            }
+
+            return this.View(model);
+        }
     }
 }
