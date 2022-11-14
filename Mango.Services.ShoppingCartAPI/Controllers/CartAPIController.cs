@@ -1,3 +1,4 @@
+using Mango.MessageBus;
 using Mango.Services.ShoppingCartAPI.Messages;
 using Mango.Services.ShoppingCartAPI.Models.Dto;
 using Mango.Services.ShoppingCartAPI.Repository;
@@ -11,12 +12,15 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
     public class CartAPIController : Controller
     {
         private readonly ICartRepository repository;
+        private readonly IMessageBus messageBus;
         protected ResponseDto response;
 
-        public CartAPIController(ICartRepository repository)
+        public CartAPIController(ICartRepository repository, IMessageBus messageBus)
         {
             this.repository = repository;
+            this.messageBus = messageBus;
             this.response = new ResponseDto();
+
         }
 
         [HttpGet("GetCart/{userId}")]
@@ -133,6 +137,7 @@ namespace Mango.Services.ShoppingCartAPI.Controllers
                 }
 
                 checkoutHeaderDto.CartDetails = cartDto.CartDetails;
+                await messageBus.PublishMessage(checkoutHeaderDto, "checkoutmessagetopic");
             }
             catch (Exception ex)
             {
