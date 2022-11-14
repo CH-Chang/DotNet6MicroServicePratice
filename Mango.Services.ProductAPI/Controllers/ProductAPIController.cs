@@ -32,7 +32,6 @@ namespace Mango.Services.ProductAPI.Controllers
         /// 取得所有商品
         /// </summary>
         /// <returns>所有商品</returns>
-        [Authorize]
         [HttpGet]
         public async Task<object> Get()
         {
@@ -57,7 +56,6 @@ namespace Mango.Services.ProductAPI.Controllers
         /// <param name="id">商品代號</param>
         /// <returns>特定商品</returns>
         [HttpGet]
-        [Authorize]
         [Route("{id}")]
         public async Task<object> Get(int id)
         {
