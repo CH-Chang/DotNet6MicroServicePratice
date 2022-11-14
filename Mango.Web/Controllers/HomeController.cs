@@ -32,6 +32,19 @@ namespace Mango.Web.Controllers
             return this.View(list);
         }
 
+        [Authorize]
+        public async Task<IActionResult> Details(int productId)
+        {
+            ProductDto productDto = new ();
+            var response = await this.productService.GetProductByIdAsync<ResponseDto>(productId, string.Empty);
+            if (response != null && response.IsSuccess)
+            {
+                string result = Convert.ToString(response.Result) ?? throw new ArgumentException("Result should not be null");
+                productDto = JsonConvert.DeserializeObject<ProductDto>(result) ?? throw new ArgumentException("Json string should not be \"null\"");
+            }
+            return this.View(productDto);
+        }
+
         public IActionResult Privacy()
         {
             return this.View();

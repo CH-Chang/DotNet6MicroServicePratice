@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Mango.Web.Models
 {
     /// <summary>
@@ -5,6 +7,11 @@ namespace Mango.Web.Models
     /// </summary>
     public class ProductDto
     {
+        public ProductDto()
+        {
+            Count = 1;
+        }
+
         /// <summary>
         /// 商品ID
         /// </summary>
@@ -34,5 +41,8 @@ namespace Mango.Web.Models
         /// 商品圖片網址
         /// </summary>
         public string ImageUrl { get; set; }
+
+        [Range(1, 100)]
+        public int Count { get; set; }
     }
 }
