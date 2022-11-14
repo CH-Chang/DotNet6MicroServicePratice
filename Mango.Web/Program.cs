@@ -30,6 +30,7 @@ builder.Services
     });
 
 SD.ProductAPIBase = builder.Configuration.GetValue<string>("ServiceUrls:ProductAPI");
+SD.ProductAPIBase = builder.Configuration.GetValue<string>("ServiceUrls:ShoppingCartAPI");
 
 var app = builder.Build();
 

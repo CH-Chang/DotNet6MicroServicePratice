@@ -35,5 +35,7 @@ namespace Mango.Web
         /// 商品API
         /// </summary>
         public static string ProductAPIBase { get; set; }
+
+        public static string ShoppingCartAPIBase { get; set; }
     }
 }
