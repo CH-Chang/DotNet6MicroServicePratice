@@ -1,8 +1,7 @@
 namespace Mango.MessageBus
 {
     using System.Text;
-    using Microsoft.Azure.ServiceBus;
-    using Microsoft.Azure.ServiceBus.Core;
+    using Azure.Messaging.ServiceBus;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -16,15 +15,15 @@ namespace Mango.MessageBus
         /// <inheritdoc />
         public async Task PublishMessage(BaseMessage message, string topic)
         {
-            ISenderClient senderClient = new TopicClient(this.connectionString, topic);
+            await using var client = new ServiceBusClient(this.connectionString);
+            ServiceBusSender sender = client.CreateSender(topic);
 
             string messageJson = JsonConvert.SerializeObject(message);
             byte[] messageBytes = Encoding.UTF8.GetBytes(messageJson);
-            Message messageEvent = new Message(messageBytes) { CorrelationId = Guid.NewGuid().ToString() };
+            ServiceBusMessage messageEvent = new ServiceBusMessage(messageBytes) { CorrelationId = Guid.NewGuid().ToString() };
 
-            await senderClient.SendAsync(messageEvent);
-
-            await senderClient.CloseAsync();
+            await sender.SendMessageAsync(messageEvent);
+            await client.DisposeAsync();
         }
     }
 }
