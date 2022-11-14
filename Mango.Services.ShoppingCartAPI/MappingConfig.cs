@@ -17,10 +17,10 @@ namespace Mango.Services.ProductAPI
         {
             MapperConfiguration mapperConfiguration = new MapperConfiguration(config =>
             {
-                config.CreateMap<ProductDto, Product>();
-                config.CreateMap<CartHeaderDto, CartHeader>();
-                config.CreateMap<CartDetailsDto, CartDetails>();
-                config.CreateMap<CartDto, Cart>();
+                config.CreateMap<ProductDto, Product>().ReverseMap();
+                config.CreateMap<CartHeader, CartHeaderDto>().ReverseMap();
+                config.CreateMap<CartDetails, CartDetailsDto>().ReverseMap();
+                config.CreateMap<Cart, CartDto>().ReverseMap();
             });
 
             return mapperConfiguration;
