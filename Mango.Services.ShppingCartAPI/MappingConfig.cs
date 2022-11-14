@@ -1,6 +1,8 @@
 namespace Mango.Services.ProductAPI
 {
     using AutoMapper;
+    using Mango.Services.ShppingCartAPI.Models;
+    using Mango.Services.ShppingCartAPI.Models.Dto;
 
     /// <summary>
     /// 對應配置
@@ -15,6 +17,10 @@ namespace Mango.Services.ProductAPI
         {
             MapperConfiguration mapperConfiguration = new MapperConfiguration(config =>
             {
+                config.CreateMap<ProductDto, Product>();
+                config.CreateMap<CartHeaderDto, CartHeader>();
+                config.CreateMap<CartDetailsDto, CartDetails>();
+                config.CreateMap<CartDto, Cart>();
             });
 
             return mapperConfiguration;
