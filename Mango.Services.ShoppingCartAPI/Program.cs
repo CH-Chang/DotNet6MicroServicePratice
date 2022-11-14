@@ -1,6 +1,6 @@
 using AutoMapper;
 using Mango.Services.ProductAPI;
-using Mango.Services.ShppingCartAPI.DbContexts;
+using Mango.Services.ShoppingCartAPI.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;

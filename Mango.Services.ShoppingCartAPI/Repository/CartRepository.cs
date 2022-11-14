@@ -1,10 +1,10 @@
 using AutoMapper;
-using Mango.Services.ShppingCartAPI.DbContexts;
-using Mango.Services.ShppingCartAPI.Models;
-using Mango.Services.ShppingCartAPI.Models.Dto;
+using Mango.Services.ShoppingCartAPI.DbContexts;
+using Mango.Services.ShoppingCartAPI.Models;
+using Mango.Services.ShoppingCartAPI.Models.Dto;
 using Microsoft.EntityFrameworkCore;
 
-namespace Mango.Services.ShppingCartAPI.Repository
+namespace Mango.Services.ShoppingCartAPI.Repository
 {
     public class CartRepository : ICartRepository
     {

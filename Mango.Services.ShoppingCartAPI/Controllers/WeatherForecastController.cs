@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Mango.Services.ShppingCartAPI.Controllers
+namespace Mango.Services.ShoppingCartAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]

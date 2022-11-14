@@ -1,6 +1,6 @@
-using Mango.Services.ShppingCartAPI.Models.Dto;
+using Mango.Services.ShoppingCartAPI.Models.Dto;
 
-namespace Mango.Services.ShppingCartAPI.Repository
+namespace Mango.Services.ShoppingCartAPI.Repository
 {
     public interface ICartRepository
     {

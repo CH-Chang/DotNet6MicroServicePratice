@@ -1,6 +1,6 @@
-namespace Mango.Services.ShppingCartAPI.DbContexts
+namespace Mango.Services.ShoppingCartAPI.DbContexts
 {
-    using Mango.Services.ShppingCartAPI.Models;
+    using Mango.Services.ShoppingCartAPI.Models;
     using Microsoft.EntityFrameworkCore;
 
     /// <summary>

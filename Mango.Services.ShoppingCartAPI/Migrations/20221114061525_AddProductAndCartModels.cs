@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Mango.Services.ShppingCartAPI.Migrations
+namespace Mango.Services.ShoppingCartAPI.Migrations
 {
     public partial class AddProductAndCartModels : Migration
     {

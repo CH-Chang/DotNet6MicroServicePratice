@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "Mango.Services.ShppingCartAPI": {
+    "Mango.Services.ShoppingCartAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

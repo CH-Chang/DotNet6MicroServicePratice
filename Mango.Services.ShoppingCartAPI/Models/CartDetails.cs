@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Mango.Services.ShppingCartAPI.Models
+namespace Mango.Services.ShoppingCartAPI.Models
 {
     public class CartDetails
     {

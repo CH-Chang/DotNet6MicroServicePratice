@@ -1,8 +1,8 @@
 namespace Mango.Services.ProductAPI
 {
     using AutoMapper;
-    using Mango.Services.ShppingCartAPI.Models;
-    using Mango.Services.ShppingCartAPI.Models.Dto;
+    using Mango.Services.ShoppingCartAPI.Models;
+    using Mango.Services.ShoppingCartAPI.Models.Dto;
 
     /// <summary>
     /// 對應配置

@@ -1,4 +1,4 @@
-namespace Mango.Services.ShppingCartAPI.Models
+namespace Mango.Services.ShoppingCartAPI.Models.Dto
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -6,18 +6,16 @@ namespace Mango.Services.ShppingCartAPI.Models
     /// <summary>
     /// 商品模型
     /// </summary>
-    public class Product
+    public class ProductDto
     {
         /// <summary>
         /// 商品ID
         /// </summary>
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ProductId { get; set; }
 
         /// <summary>
         /// 商品名稱
         /// </summary>
-        [Required]
         public string Name { get; set; }
 
         /// <summary>
@@ -28,7 +26,6 @@ namespace Mango.Services.ShppingCartAPI.Models
         /// <summary>
         /// 商品價格
         /// </summary>
-        [Range(1, 1000)]
         public double Price { get; set; }
 
         /// <summary>

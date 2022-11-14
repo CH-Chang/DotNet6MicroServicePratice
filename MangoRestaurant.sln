@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{AF
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.ProductAPI", "Mango.Services.ProductAPI\Mango.Services.ProductAPI.csproj", "{CDBD1445-575D-4327-AAC3-1CFE1D861F24}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.ShppingCartAPI", "Mango.Services.ShppingCartAPI\Mango.Services.ShppingCartAPI.csproj", "{DBE713A0-C218-44E6-B8F3-1C883D389D4E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.ShoppingCartAPI", "Mango.Services.ShoppingCartAPI\Mango.Services.ShoppingCartAPI.csproj", "{DBE713A0-C218-44E6-B8F3-1C883D389D4E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mango.Services.Identity", "Mango.Services.Identity\Mango.Services.Identity.csproj", "{6593CF15-1D34-45AF-84D9-D9733EF38ADD}"
 EndProject
