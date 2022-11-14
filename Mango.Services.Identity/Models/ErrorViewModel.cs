@@ -1,4 +1,4 @@
-namespace Mango.Service.Identity.Models
+namespace Mango.Services.Identity.Models
 {
     public class ErrorViewModel
     {

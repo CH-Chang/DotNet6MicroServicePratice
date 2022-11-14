@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Mango.Service.Identity.Migrations
+namespace Mango.Services.Identity.Migrations
 {
     public partial class ConfigureDefaultIdentityTables : Migration
     {

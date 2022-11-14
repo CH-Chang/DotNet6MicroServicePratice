@@ -1,9 +1,9 @@
 using Duende.IdentityServer.Services;
-using Mango.Service.Identity;
-using Mango.Service.Identity.DbContexts;
-using Mango.Service.Identity.Initializer;
-using Mango.Service.Identity.Models;
-using Mango.Service.Identity.Services;
+using Mango.Services.Identity;
+using Mango.Services.Identity.DbContexts;
+using Mango.Services.Identity.Initializer;
+using Mango.Services.Identity.Models;
+using Mango.Services.Identity.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

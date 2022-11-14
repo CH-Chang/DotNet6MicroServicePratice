@@ -1,4 +1,4 @@
-namespace Mango.Service.Identity.Initializer
+namespace Mango.Services.Identity.Initializer
 {
     public interface IDbInitializer
     {

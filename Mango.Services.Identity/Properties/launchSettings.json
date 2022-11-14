@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "Mango.Service.Identity": {
+    "Mango.Services.Identity": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,

@@ -1,7 +1,7 @@
 using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 
-namespace Mango.Service.Identity
+namespace Mango.Services.Identity
 {
     public static class SD
     {

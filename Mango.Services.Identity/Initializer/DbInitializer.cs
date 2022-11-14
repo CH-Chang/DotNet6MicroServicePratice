@@ -1,10 +1,10 @@
 using System.Security.Claims;
 using IdentityModel;
-using Mango.Service.Identity.DbContexts;
-using Mango.Service.Identity.Models;
+using Mango.Services.Identity.DbContexts;
+using Mango.Services.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace Mango.Service.Identity.Initializer
+namespace Mango.Services.Identity.Initializer
 {
     public class DbInitializer : IDbInitializer
     {

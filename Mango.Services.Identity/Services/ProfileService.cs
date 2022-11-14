@@ -3,10 +3,10 @@ using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using IdentityModel;
-using Mango.Service.Identity.Models;
+using Mango.Services.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace Mango.Service.Identity.Services
+namespace Mango.Services.Identity.Services
 {
     public class ProfileService : IProfileService
     {

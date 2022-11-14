@@ -1,7 +1,7 @@
 using IdentityServerHost.Quickstart.UI;
 using System.ComponentModel.DataAnnotations;
 
-namespace Mango.Service.Identity.MainModule.Account
+namespace Mango.Services.Identity.MainModule.Account
 {
     public class RegisterViewModel
     {

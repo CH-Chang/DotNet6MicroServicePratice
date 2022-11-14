@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Mango.Service.Identity.Migrations
+namespace Mango.Services.Identity.Migrations
 {
     public partial class AddFirstLastNameToUser : Migration
     {

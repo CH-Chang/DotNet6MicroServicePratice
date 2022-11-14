@@ -1,8 +1,8 @@
-using Mango.Service.Identity.Models;
+using Mango.Services.Identity.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Mango.Service.Identity.DbContexts
+namespace Mango.Services.Identity.DbContexts
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
