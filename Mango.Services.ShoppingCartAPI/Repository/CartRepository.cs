@@ -35,38 +35,48 @@ namespace Mango.Services.ShoppingCartAPI.Repository
         {
             Cart cart = this.mapper.Map<Cart>(cartDto);
 
-            var prodInDb = applicationDbContext.Products.First(u => u.ProductId == cartDto.CartDetails.FirstOrDefault().ProductId);
-            if (prodInDb == null) {
-                applicationDbContext.Products.Add(cart.CartDetails.FirstOrDefault().Product);
-                await applicationDbContext.SaveChangesAsync();
+            var prodInDb = await this.applicationDbContext.Products
+                .FirstOrDefaultAsync(u => u.ProductId == cartDto.CartDetails.FirstOrDefault()
+                .ProductId);
+            if (prodInDb == null)
+            {
+                this.applicationDbContext.Products.Add(cart.CartDetails.FirstOrDefault().Product);
+                await this.applicationDbContext.SaveChangesAsync();
             }
 
-            var cartHeaderFromDb = await applicationDbContext.CartHeader.AsNoTracking().FirstOrDefaultAsync(u => u.UserId == cart.CartHeader.UserId);
+            var cartHeaderFromDb = await this.applicationDbContext.CartHeader.AsNoTracking()
+                .FirstOrDefaultAsync(u => u.UserId == cart.CartHeader.UserId);
+
             if (cartHeaderFromDb == null)
             {
-                applicationDbContext.CartHeader.Add(cart.CartHeader);
-                await applicationDbContext.SaveChangesAsync();
+                this.applicationDbContext.CartHeader.Add(cart.CartHeader);
+                await this.applicationDbContext.SaveChangesAsync();
                 cart.CartDetails.FirstOrDefault().CartHeaderId = cart.CartHeader.CartHeaderId;
                 cart.CartDetails.FirstOrDefault().Product = null;
-                applicationDbContext.CartDetails.Add(cart.CartDetails.FirstOrDefault());
-                await applicationDbContext.SaveChangesAsync();
+                this.applicationDbContext.CartDetails.Add(cart.CartDetails.FirstOrDefault());
+                await this.applicationDbContext.SaveChangesAsync();
             }
             else
             {
-                var carDetailsFromDb = await applicationDbContext.CartDetails.AsNoTracking().FirstOrDefaultAsync(u => u.ProductId == cart.CartDetails.FirstOrDefault().ProductId && u.CartHeaderId == cartHeaderFromDb.CartHeaderId);
+                var cartDetailsFromDb = await this.applicationDbContext.CartDetails.AsNoTracking().FirstOrDefaultAsync(
+                    u => u.ProductId == cart.CartDetails.FirstOrDefault().ProductId &&
+                    u.CartHeaderId == cartHeaderFromDb.CartHeaderId);
 
-                if (cartHeaderFromDb == null)
+                if (cartDetailsFromDb == null)
                 {
                     cart.CartDetails.FirstOrDefault().CartHeaderId = cartHeaderFromDb.CartHeaderId;
                     cart.CartDetails.FirstOrDefault().Product = null;
-                    applicationDbContext.CartDetails.Add(cart.CartDetails.FirstOrDefault());
-                    await applicationDbContext.SaveChangesAsync();
-                } else
+                    this.applicationDbContext.CartDetails.Add(cart.CartDetails.FirstOrDefault());
+                    await this.applicationDbContext.SaveChangesAsync();
+                }
+                else
                 {
                     cart.CartDetails.FirstOrDefault().Product = null;
-                    cart.CartDetails.FirstOrDefault().Count += carDetailsFromDb.Count;
-                    applicationDbContext.CartDetails.Update(cart.CartDetails.FirstOrDefault());
-                    await applicationDbContext.SaveChangesAsync();
+                    cart.CartDetails.FirstOrDefault().Count += cartDetailsFromDb.Count;
+                    cart.CartDetails.FirstOrDefault().CartDetailsId = cartDetailsFromDb.CartDetailsId;
+                    cart.CartDetails.FirstOrDefault().CartHeaderId = cartDetailsFromDb.CartHeaderId;
+                    this.applicationDbContext.CartDetails.Update(cart.CartDetails.FirstOrDefault());
+                    await this.applicationDbContext.SaveChangesAsync();
                 }
             }
 

@@ -8,7 +8,7 @@ namespace Mango.Services.ShoppingCartAPI.Models.Dto
         /// <summary>
         /// 是否成功
         /// </summary>
-        public bool IsSuccess { get; set; } = false;
+        public bool IsSuccess { get; set; } = true;
 
         /// <summary>
         /// 展示訊息
