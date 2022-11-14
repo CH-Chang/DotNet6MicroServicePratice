@@ -1,5 +1,6 @@
 namespace Mango.Services.ShppingCartAPI.DbContexts
 {
+    using Mango.Services.ShppingCartAPI.Models;
     using Microsoft.EntityFrameworkCore;
 
     /// <summary>
@@ -15,6 +16,11 @@ namespace Mango.Services.ShppingCartAPI.DbContexts
             : base(options)
         {
         }
-       
+
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<CartHeader> CartHeader { get; set; }
+
+        public DbSet<CartDetails> CartDetails { get; set; }
     }
 }
