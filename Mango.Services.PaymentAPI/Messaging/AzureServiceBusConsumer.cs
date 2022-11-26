@@ -2,9 +2,6 @@ using System.Text;
 using Azure.Messaging.ServiceBus;
 using Mango.MessageBus;
 using Mango.Services.PaymentAPI.Messages;
-using Mango.Services.PaymentAPI.Models;
-using Mango.Services.PaymentAPI.Repository;
-using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using PaymentProcessor;
 
