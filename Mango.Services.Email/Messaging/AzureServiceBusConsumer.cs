@@ -51,14 +51,12 @@ namespace Mango.Services.Email.Messaging
             ServiceBusReceivedMessage message = args.Message;
 
             var body = Encoding.UTF8.GetString(message.Body);
-            UpdatePaymentResultMessage paymentResultMessage = JsonConvert.DeserializeObject<UpdatePaymentResultMessage>(body);
-
-            // await orderRepository.UpdateOrderPaymentStatus(paymentResultMessage.OrderId, paymentResultMessage.Status);
+            UpdatePaymentResultMessage updatePaymentResultMessage = JsonConvert.DeserializeObject<UpdatePaymentResultMessage>(body);
             
 
             try
             {
-                await emailRepository.SendAndLogEmail(paymentResultMessage);
+                await emailRepository.SendAndLogEmail(updatePaymentResultMessage);
                 await args.CompleteMessageAsync(args.Message);
             } catch (Exception)
             {
